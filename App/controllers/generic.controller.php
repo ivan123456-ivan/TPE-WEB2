@@ -13,4 +13,10 @@ class GenericController{
     public function showError($msgError){
         $this->view->showError($msgError);
     }
+    public function showSignInPage(){
+        $this->view->showSignInPage();
+    }
+    public function showSignUpPage(){
+        $this->view->showSignUpPage();
+    }
 }

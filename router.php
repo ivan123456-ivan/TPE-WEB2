@@ -30,6 +30,12 @@
         case 'home':
             $genericController->showHome();
             break;
+        case 'signin':
+            $genericController->showSignInPage();
+            break;
+        case 'signup':
+            $genericController->showSignUpPage();
+            break;
         default:
             $genericController->showError('404 not found');
             break;

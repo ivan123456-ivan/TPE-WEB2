@@ -22,13 +22,13 @@
                 <!-- Elementos a la izquierda -->
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="home">Inicio</a>
+                        <a class="nav-link" href="home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Comercios</a>
+                        <a class="nav-link" href="#">Shops</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Productos</a>
+                        <a class="nav-link" href="#">Products</a>
                     </li>
                 </ul>
 
@@ -39,16 +39,16 @@
                 <ul class="navbar-nav ml-auto">
                     <?php if (!isset($_SESSION['logueado'])) : ?><!-- aca hay que comprobar si el usuario no está logueado -->
                         <li class="nav-item">
-                            <a class="nav-link" href="signup">Registrarse</a>
+                            <a class="nav-link" href="signup">Sign Up</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="signin">Ingresar</a>
+                            <a class="nav-link" href="signin">Sign In</a>
                         </li>
                     <?php
                     else :
                     ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="signout">Cerrar Sesión</a>
+                            <a class="nav-link" href="signout">Sign Out</a>
                         </li>
                     <?php endif ?>
                 </ul>
