@@ -6,12 +6,6 @@ class AuthHelper{
             session_start();
         }
     }
-    public static function signIn($user){
-        AuthHelper::init();
-        $_SESSION['User_email'];
-        $_SESSION['password'];
-
-    }
     public static function logout(){
         AuthHelper::init();
         session_destroy();
