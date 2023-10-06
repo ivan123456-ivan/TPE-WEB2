@@ -1,10 +1,16 @@
 <?php
-require_once './App/models/user.model.php';
-class CategoryModel extends UserModel{
-    public function getCategories(){
-        $query = $this->db->prepare('SELECT * FROM categorias');
-        $query->execute();
+require_once './App/models/generic.model.php';
+class CategoryModel extends GenericModel
+{
+    private $genericModel, $getAll;
+    public function __construct()
+    {
+        $this->genericModel = new GenericModel();
+        $this->getAll = 'SELECT * FROM categories';
+    }
 
-        return $query->fetchAll(PDO::FETCH_OBJ);
+    public function getAllCategories()
+    {
+        return $this->genericModel->getAll($this->getAll);
     }
 }

@@ -1,5 +1,5 @@
 <?php
-require_once './App/models/user.model.php';
-class ShopModel extends UserModel{
-    
+require_once './App/models/generic.model.php';
+class ShopModel extends GenericModel
+{
 }

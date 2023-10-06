@@ -1,17 +1,21 @@
 <?php
-require_once './App/models/user.model.php';
-class ProductModel extends UserModel{
+require_once './App/models/generic.model.php';
+class ProductModel extends GenericModel
+{
 
 
-    public function getProduct(){
+    public function getAllData()
+    {
         $productName = $_POST['productName'];
         $productDescription = $_POST['productDescription'];
         $productImage = $_POST['productImage'];
         $productPrice = $_POST['productPrice'];
         $productStock = $_POST['productStock'];
     }
-    public function insertNewProduct(){
+
+    public function addProduct($array)
+    {
         $query = $this->db->prepare("INSERT INTO `productos` (`nombre`, `precio`, `stock`, `id_categoria`, `product_image`, `product_description`) VALUES (?, ?, ?, ?, ?, ?)");
-        $query->execute([$productName, $productPrice, $productStock, $productImage, $productDescription]);
+        $query->execute($array);
     }
 }
