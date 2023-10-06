@@ -36,6 +36,9 @@
         case 'signup':
             $genericController->showSignUpPage();
             break;
+        case 'createUser':
+            $userController = new UserController();
+            $userController->createUser();
         default:
             $genericController->showError('404 not found');
             break;

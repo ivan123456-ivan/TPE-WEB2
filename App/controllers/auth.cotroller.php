@@ -9,4 +9,5 @@ class AuthCotroller{
         AuthHelper::logout();
         header('Location: '. BASE_URL . 'home');
     }
+    
 }
