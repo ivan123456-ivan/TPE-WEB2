@@ -12,4 +12,3 @@ class AuthHelper{
         session_destroy();
     }
 }
-?>

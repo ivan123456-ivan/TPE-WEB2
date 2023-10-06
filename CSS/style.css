@@ -1,0 +1,35 @@
+/* HEADER */
+#logo {
+    height: 11vh;
+}
+
+.navbar {
+    padding: 0;
+    border-bottom: 1.5px solid rgb(187, 187, 187);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    font-size: 20px;
+}
+
+/* HOME */
+
+.container-carousel {
+    display: flex;
+    justify-content: center;
+}
+
+.carousel-img,
+.carousel {
+    height: 70vh;
+    width: 72vw;
+}
+
+.carousel-img {
+    border-radius: 15px;
+}
+
+/* FOOTER */
+footer {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}

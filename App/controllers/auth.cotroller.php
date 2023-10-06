@@ -10,4 +10,3 @@ class AuthCotroller{
         header('Location: '. BASE_URL . 'home');
     }
 }
-?>

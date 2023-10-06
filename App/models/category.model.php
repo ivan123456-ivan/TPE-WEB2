@@ -1,4 +1,5 @@
 <?php
+require_once './App/models/user.model.php';
 class CategoryModel extends UserModel{
     public function getCategories(){
         $query = $this->db->prepare('SELECT * FROM categorias');
@@ -7,4 +8,3 @@ class CategoryModel extends UserModel{
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 }
-?>
