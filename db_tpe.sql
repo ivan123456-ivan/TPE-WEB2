@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-10-2023 a las 21:12:01
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 07-10-2023 a las 02:38:32
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,42 +24,50 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categorias`
+-- Estructura de tabla para la tabla `categories`
 --
 
-CREATE TABLE `categorias` (
+CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `name` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`) VALUES
+(2, 'Hamburguesas'),
+(1, 'Pizzas');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `comercios`
+-- Estructura de tabla para la tabla `products`
 --
 
-CREATE TABLE `comercios` (
+CREATE TABLE `products` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL,
-  `direccion` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `productos`
---
-
-CREATE TABLE `productos` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL,
-  `precio` float NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `price` float NOT NULL,
   `stock` int(11) NOT NULL,
-  `id_categoria` int(11) NOT NULL,
-  `id_comercios` int(11) NOT NULL,
+  `id_categories` int(11) NOT NULL,
+  `id_shops` int(11) NOT NULL,
   `product_image` varchar(250) NOT NULL,
   `product_description` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `shops`
+--
+
+CREATE TABLE `shops` (
+  `id` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `address` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -71,41 +79,41 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `user` varchar(45) NOT NULL,
   `password` varchar(250) NOT NULL,
-  `rol` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `rol` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id`, `user`, `password`, `rol`) VALUES
-(3, 'webadmin', '$2y$10$Onrd4KZg.JXFYEu37G7jNet3SxLDJM0v5odG81GclE1I3INa8mOei', '');
+(1, 'webadmin', '$2y$10$Onrd4KZg.JXFYEu37G7jNet3SxLDJM0v5odG81GclE1I3INa8mOei', 1);
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `categorias`
+-- Indices de la tabla `categories`
 --
-ALTER TABLE `categorias`
+ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nombre_UNIQUE` (`nombre`);
+  ADD UNIQUE KEY `nombre_UNIQUE` (`name`);
 
 --
--- Indices de la tabla `comercios`
+-- Indices de la tabla `products`
 --
-ALTER TABLE `comercios`
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nombre_UNIQUE` (`name`),
+  ADD KEY `categoria_id_idx` (`id_categories`),
+  ADD KEY `fk_productos_comercios1_idx` (`id_shops`);
+
+--
+-- Indices de la tabla `shops`
+--
+ALTER TABLE `shops`
   ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `productos`
---
-ALTER TABLE `productos`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nombre_UNIQUE` (`nombre`),
-  ADD KEY `categoria_id_idx` (`id_categoria`),
-  ADD KEY `fk_productos_comercios1_idx` (`id_comercios`);
 
 --
 -- Indices de la tabla `users`
@@ -119,21 +127,21 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT de la tabla `categorias`
+-- AUTO_INCREMENT de la tabla `categories`
 --
-ALTER TABLE `categorias`
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `products`
+--
+ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `comercios`
+-- AUTO_INCREMENT de la tabla `shops`
 --
-ALTER TABLE `comercios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `productos`
---
-ALTER TABLE `productos`
+ALTER TABLE `shops`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -147,11 +155,11 @@ ALTER TABLE `users`
 --
 
 --
--- Filtros para la tabla `productos`
+-- Filtros para la tabla `products`
 --
-ALTER TABLE `productos`
-  ADD CONSTRAINT `categoria_id` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_productos_comercios1` FOREIGN KEY (`id_comercios`) REFERENCES `comercios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `products`
+  ADD CONSTRAINT `categoria_id` FOREIGN KEY (`id_categories`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_productos_comercios1` FOREIGN KEY (`id_shops`) REFERENCES `shops` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
