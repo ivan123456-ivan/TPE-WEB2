@@ -44,6 +44,10 @@ switch ($params[0]) {
         break;
     case 'addProduct':
         $categoryController->showCategories();
+        $productController->getAllData();
+        break;
+    case 'productPage':
+        $productController->showProductPage();
         break;
     default:
         $genericController->showError('404 not found');

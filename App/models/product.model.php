@@ -2,20 +2,20 @@
 require_once './App/models/generic.model.php';
 class ProductModel extends GenericModel
 {
-
-
-    public function getAllData()
-    {
-        $productName = $_POST['productName'];
-        $productDescription = $_POST['productDescription'];
-        $productImage = $_POST['productImage'];
-        $productPrice = $_POST['productPrice'];
-        $productStock = $_POST['productStock'];
+    private $genericModel, $getAll, $insert;
+    public function __construct(){
+        $this->genericModel = new GenericModel();
+        $this->getAll = 'SELECT * FROM products';
+        $this->insert = "INSERT INTO `products` (`name`, `price`, `stock`, `product_image`, `product_description`) VALUES ( '', '', '','', '')";
     }
 
     public function addProduct($array)
     {
-        $query = $this->db->prepare("INSERT INTO `productos` (`nombre`, `precio`, `stock`, `id_categoria`, `product_image`, `product_description`) VALUES (?, ?, ?, ?, ?, ?)");
-        $query->execute($array);
+        $this->genericModel->insert([$array], $this->insert);
     }
+
+    public function getAllProduct(){
+        return $this->genericModel->getAll($this->getAll);
+    }
+
 }
