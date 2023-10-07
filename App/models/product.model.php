@@ -6,12 +6,12 @@ class ProductModel extends GenericModel
     public function __construct(){
         $this->genericModel = new GenericModel();
         $this->getAll = 'SELECT * FROM products';
-        $this->insert = "INSERT INTO `products` (`name`, `price`, `stock`, `product_image`, `product_description`) VALUES ( '', '', '','', '')";
+        $this->insert = "INSERT INTO `products` (`name`, `price`, `stock`, `product_image`, `product_description`) VALUES ( ?, ?, ?, ?, ?)";
     }
 
     public function addProduct($array)
     {
-        $this->genericModel->insert([$array], $this->insert);
+        $this->genericModel->insert($array, $this->insert);
     }
 
     public function getAllProduct(){
