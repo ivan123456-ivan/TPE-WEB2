@@ -1,0 +1,6 @@
+<select name="select-categories" class="form-select mb-4" aria-label="Default select example">
+    <option selected>Select category product</option>
+    <?php foreach ($categories as $category) : ?>
+        <option value="<?= $category->id ?>"><?= $category->name ?></option>
+    <?php endforeach ?>
+</select>

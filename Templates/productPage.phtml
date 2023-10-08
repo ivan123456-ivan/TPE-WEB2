@@ -1,4 +1,9 @@
 <div class="container w-100">
+    <form action="searchByCategory" method="POST">
+        <?php require './Templates/selectCategories.phtml' ?>
+        <button class="btn btn-outline-primary">Search</button>
+    </form>
+
     <?php for ($i = 0; $i < count($products); $i++) : ?>
         <?php require './Templates/product.phtml'; ?>
     <?php endfor ?>

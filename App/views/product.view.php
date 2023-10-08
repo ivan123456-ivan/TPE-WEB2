@@ -8,13 +8,13 @@ class ProductView
         require './Templates/RegisterProduct.phtml';
         require './Templates/footer.phtml';
     }
-    public function showProductPage($products){
+    public function showProductPage($products, $categories)
+    {
         $title = 'Product Page';
 
         require './Templates/header.phtml';
         require './Templates/productPage.phtml';
-        require './Templates/footer.phtml';   
-
+        require './Templates/footer.phtml';
     }
     public function showProductPageAdministration()
     {

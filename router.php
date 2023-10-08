@@ -49,6 +49,9 @@ switch ($params[0]) {
     case 'productPage':
         $productController->showProductPage();
         break;
+    case 'searchByCategory':
+        $productController->searchByCategory();
+        break;
     default:
         $genericController->showError('404 not found');
         break;

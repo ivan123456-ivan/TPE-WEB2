@@ -1,31 +1,26 @@
 <div class="container d-flex justify-content-center h-100 w-100">
   <form method="POST" action="addProduct" class="d-flex flex-column h-100 w-50 align-items-center">
-      <div class="mb-3 w-100">
-        <label for="productName" class="form-label">Product name</label>
-        <input type="text" name="productName" class="form-control" id="ProductName">
-      </div>
-      <div class="mb-3 w-100">
-        <label for="productDescription" class="form-label">Product description</label>
-        <input type="text" name="productDescription" class="form-control" id="productDescription">
-      </div>
-      <div class="mb-3 w-100">
-        <label for="imageURL" class="form-label">URL product</label>
-        <input type="text" name="productImage" class="form-control" id="imageURL">
-      </div>
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Select category product</option>
-        <?php foreach ($categories as $category) : ?>
-          <option value="<?= $category->id ?>"><?= $category->name ?></option>
-        <?php endforeach ?>
-      </select>
-      <div class="mb-3 w-100">
-        <label for="productPrice" class="form-label">Product price</label>
-        <input type="number" name="productPrice" class="form-control" id="productPrice">
-      </div>
-      <div class="mb-3 w-100">
-        <label for="productStock" class="form-label">Product Stock</label>
-        <input type="number" name="productStock" class="form-control" id="productStock">
-      </div>
-      <button type="submit" class="btn btn-primary">add Product</button>
+    <div class="mb-3 w-100">
+      <label for="productName" class="form-label">Product name</label>
+      <input type="text" name="productName" class="form-control" id="ProductName">
+    </div>
+    <div class="mb-3 w-100">
+      <label for="productDescription" class="form-label">Product description</label>
+      <input type="text" name="productDescription" class="form-control" id="productDescription">
+    </div>
+    <div class="mb-3 w-100">
+      <label for="imageURL" class="form-label">URL product</label>
+      <input type="text" name="productImage" class="form-control" id="imageURL">
+    </div>
+    <?php require './selectCategories.phtml' ?>
+    <div class="mb-3 w-100">
+      <label for="productPrice" class="form-label">Product price</label>
+      <input type="number" name="productPrice" class="form-control" id="productPrice">
+    </div>
+    <div class="mb-3 w-100">
+      <label for="productStock" class="form-label">Product Stock</label>
+      <input type="number" name="productStock" class="form-control" id="productStock">
+    </div>
+    <button type="submit" class="btn btn-primary">add Product</button>
   </form>
-</div> 
+</div>
