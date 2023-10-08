@@ -1,6 +1,6 @@
 <div class="container w-100 row row-cols-3">
-        <?php
-        foreach($products[0] as $product) : ?> 
+    <?php
+    foreach ($products as $product) : ?>
         <div class="card col">
             <img src="<?= $product->product_image ?>" class="card-img-top" alt="<?= $product->product_description ?>">
             <div class="card-body">
@@ -10,8 +10,6 @@
                 <p><?= $product->price ?></p>
             </div>
         </div>
-        <?php endforeach;
-        
-        ?>
+    <?php endforeach ?>
 
 </div>

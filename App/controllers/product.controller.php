@@ -24,24 +24,20 @@ class ProductController
             $products = $search;
         }
         $categories = $this->modelCategories->getAllCategories();
-        $this->view->showProductPage([$products], $categories);
+        $this->view->showProductPage($products, $categories);
     }
 
     public function searchByCategory()
-    {   
-
-
+    {
         if ($_POST) {
-            $category = $_POST['select-categories'];            
+            $category = $_POST['select-categories'];
             if (isset($category) && is_numeric($category)) {
                 $search = $this->model->getAllByCategory((int) $category);
                 $this->showProductPage($search);
-            }else{
-
+            } else {
                 header('Location: ' . BASE_URL . 'productPage');
             }
         }
-        
     }
 
     public function showProductPageAdministration()
