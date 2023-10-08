@@ -16,13 +16,24 @@ class GenericView
         require './Templates/error.phtml';
         require './Templates/footer.phtml';
     }
-    public function showSignInPage(){
+
+    public function showSuccess($msgSuccess)
+    {
+        $title = "Success";
+        require './Templates/header.phtml';
+        require './Templates/success.phtml';
+        require './Templates/footer.phtml';
+    }
+
+    public function showSignInPage()
+    {
         $title = "Sign In";
         require './Templates/header.phtml';
         require './Templates/signIn.phtml';
         require './Templates/footer.phtml';
     }
-    public function showSignUpPage(){
+    public function showSignUpPage()
+    {
         $title = "Sign Up";
         require './Templates/header.phtml';
         require './Templates/signUp.phtml';

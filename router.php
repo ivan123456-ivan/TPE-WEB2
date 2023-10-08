@@ -25,6 +25,7 @@ if (!empty($_GET['action'])) {
 }
 $genericController = new GenericController();
 $userController = new UserController();
+$shopController = new ShopController();
 $productController = new ProductController();
 $categoryController = new CategoryController();
 // parsea la accion Ej: noticia/1 --> ['noticia', 1]
@@ -51,6 +52,12 @@ switch ($params[0]) {
         break;
     case 'searchByCategory':
         $productController->searchByCategory();
+        break;
+    case 'shopPage':
+        $shopController->showShopPage();
+        break;
+    case 'addShop':
+        $shopController->showShopPageAdministration();
         break;
     default:
         $genericController->showError('404 not found');

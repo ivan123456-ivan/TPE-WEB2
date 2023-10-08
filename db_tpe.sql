@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-10-2023 a las 23:11:30
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 08-10-2023 a las 23:55:15
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `categories`
@@ -55,7 +55,7 @@ CREATE TABLE `products` (
   `id_shops` int(11) DEFAULT NULL,
   `product_image` varchar(250) NOT NULL,
   `product_description` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `products`
@@ -76,8 +76,21 @@ INSERT INTO `products` (`id`, `name`, `price`, `stock`, `id_categories`, `id_sho
 CREATE TABLE `shops` (
   `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
-  `address` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `address` varchar(45) NOT NULL,
+  `shop_image` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `shops`
+--
+
+INSERT INTO `shops` (`id`, `name`, `address`, `shop_image`) VALUES
+(1, 'Mostaza', 'Panamá 353, B7000 Tandil', 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Mostaza_company_logo.png'),
+(3, 'Caminito 2', 'Dinamarca 823, B7000 Tandil', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4xrMVcLS-ItsyLeIbhIzOZA42p2KglJ8nevfx-rs0rDnKoT729LcYTer1weL1Yow5HAY&usqp=CAU'),
+(4, 'Grido Helados', 'Quintana 385, B7000 Tandil', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Grido_logo.svg/1280px-Grido_logo.svg.png'),
+(5, 'Antares', 'Avenida España 737, B7000 Tandil', 'https://www.cervezaantares.com/assets/images/logo/logo_antares.svg'),
+(7, 'Mi Granito de Café', 'Pinto 677, B7000 Tandil', 'https://scontent.faep1-1.fna.fbcdn.net/v/t39.30808-1/361300470_613155607581449_224683373030379610_n.jpg?stp=dst-jpg_p200x200&_nc_cat=101&ccb=1-7&_nc_sid=754033&_nc_ohc=mP2PDanQCOcAX90BjXb&_nc_ht=scontent.faep1-1.fna&oh=00_AfB9HFEPw85xZCzjl1FGB9AAX9AqTH8AeiMB-am2ws70Fg&oe=6528225C'),
+(8, 'Benevento', 'San Martín 798, B7000 Tandil', 'https://static.laguia.online/business/232790/logo/62320a1311009.png');
 
 -- --------------------------------------------------------
 
@@ -89,17 +102,17 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `user` varchar(45) NOT NULL,
   `password` varchar(250) NOT NULL,
-  `rol` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `rol` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id`, `user`, `password`, `rol`) VALUES
-(1, 'webadmin', '$2y$10$Onrd4KZg.JXFYEu37G7jNet3SxLDJM0v5odG81GclE1I3INa8mOei', 1),
-(5, 'UsuarioDePrueba', '$2y$10$YbRzpG0QO3CrJ.3GxO3y5eF4WnM8f5O0.Gx4mkEjmy4DB.uabG3wq', 0),
-(6, 'UsuarioDePrueba2', '$2y$10$ZirgpYtDE86EA8QDwZzacOBUb2MRJfVwC89t.dE8gHijbNyzqUOtO', 0);
+(1, 'webadmin', '$2y$10$Onrd4KZg.JXFYEu37G7jNet3SxLDJM0v5odG81GclE1I3INa8mOei', '1'),
+(5, 'UsuarioDePrueba', '$2y$10$YbRzpG0QO3CrJ.3GxO3y5eF4WnM8f5O0.Gx4mkEjmy4DB.uabG3wq', '0'),
+(6, 'UsuarioDePrueba2', '$2y$10$ZirgpYtDE86EA8QDwZzacOBUb2MRJfVwC89t.dE8gHijbNyzqUOtO', '0');
 
 --
 -- Índices para tablas volcadas
@@ -154,7 +167,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT de la tabla `shops`
 --
 ALTER TABLE `shops`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `users`

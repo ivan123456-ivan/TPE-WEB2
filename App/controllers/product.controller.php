@@ -32,7 +32,7 @@ class ProductController
         if ($_POST) {
             $category = $_POST['select-categories'];
             if (isset($category) && is_numeric($category)) {
-                $search = $this->model->getAllByCategory((int) $category);
+                $search = $this->model->getAllByCategory($category);
                 $this->showProductPage($search);
             } else {
                 header('Location: ' . BASE_URL . 'productPage');
@@ -47,13 +47,13 @@ class ProductController
 
     public function getAllData()
     {
-        if($_POST){
+        if ($_POST) {
             $productName = $_POST['productName'];
             $productDescription = $_POST['productDescription'];
             $productImage = $_POST['productImage'];
             $productPrice = $_POST['productPrice'];
             $productStock = $_POST['productStock'];
-            $this->model->addProduct([$productName, $productPrice, $productStock, $productImage, $productDescription]);    
+            $this->model->addProduct([$productName, $productPrice, $productStock, $productImage, $productDescription]);
         }
     }
 

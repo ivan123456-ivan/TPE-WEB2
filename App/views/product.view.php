@@ -5,7 +5,7 @@ class ProductView
     {
         $title = 'Add Product';
         require './Templates/header.phtml';
-        require './Templates/RegisterProduct.phtml';
+        require './Templates/registerProduct.phtml';
         require './Templates/footer.phtml';
     }
     public function showProductPage($products, $categories)
@@ -20,7 +20,7 @@ class ProductView
     {
         $title = 'Products Administration';
         require './Templates/header.phtml';
-        require './Templates/RegisterProduct.phtml';
+        require './Templates/registerProduct.phtml';
         require './Templates/footer.phtml';
     }
 }
