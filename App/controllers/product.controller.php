@@ -47,13 +47,14 @@ class ProductController
 
     public function getAllData()
     {
-        $productName = $_POST['productName'];
-        $productDescription = $_POST['productDescription'];
-        $productImage = $_POST['productImage'];
-        $productPrice = $_POST['productPrice'];
-        $productStock = $_POST['productStock'];
-
-        $this->model->addProduct([$productName, $productPrice, $productStock, $productImage, $productDescription]);
+        if($_POST){
+            $productName = $_POST['productName'];
+            $productDescription = $_POST['productDescription'];
+            $productImage = $_POST['productImage'];
+            $productPrice = $_POST['productPrice'];
+            $productStock = $_POST['productStock'];
+            $this->model->addProduct([$productName, $productPrice, $productStock, $productImage, $productDescription]);    
+        }
     }
 
     public function showAllProduct()
