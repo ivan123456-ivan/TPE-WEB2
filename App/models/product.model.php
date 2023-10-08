@@ -22,7 +22,8 @@ class ProductModel extends GenericModel
 
     public function getAllByCategory($id)
     {
-        $query = $this->db->prepare('SELECT * FROM products WHERE id_categories = ?');
+        $query = $this->genericModel->db->prepare('SELECT * FROM products WHERE id_categories = ?');
+        //$query = $this->db->prepare('SELECT * FROM products WHERE id_categories = ?');
         $query->execute([$id]);
 
         return $query->fetchAll(PDO::FETCH_OBJ);

@@ -1,6 +1,7 @@
 <?php
 require_once './App/models/product.model.php';
 require_once './App/views/product.view.php';
+require_once './App/models/category.model.php';
 class ProductController
 {
     private $model, $view, $modelCategories;
@@ -27,15 +28,20 @@ class ProductController
     }
 
     public function searchByCategory()
-    {
+    {   
+
+
         if ($_POST) {
-            $category = $_POST['select-categories'];
+            $category = $_POST['select-categories'];            
             if (isset($category) && is_numeric($category)) {
                 $search = $this->model->getAllByCategory((int) $category);
                 $this->showProductPage($search);
+            }else{
+
+                header('Location: ' . BASE_URL . 'productPage');
             }
-            header('Location: ' . BASE_URL . 'productPage');
         }
+        
     }
 
     public function showProductPageAdministration()

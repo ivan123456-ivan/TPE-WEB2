@@ -1,5 +1,6 @@
 <?php
 require_once './App/models/category.model.php';
+require_once './App/views/product.view.php';
 class CategoryController
 {
     private $model, $viewProduct;
