@@ -5,6 +5,7 @@ class ShopModel extends GenericModel
     private $genericModel, $getAll, $insert;
     public function __construct()
     {
+        parent::__construct();
         $this->genericModel = new GenericModel();
         $this->getAll = 'SELECT * FROM shops';
         $this->insert = 'INSERT INTO shops(name, address, shop_image)VALUES(?, ?, ?)';

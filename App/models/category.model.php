@@ -5,6 +5,7 @@ class CategoryModel extends GenericModel
     private $genericModel, $getAll;
     public function __construct()
     {
+        parent::__construct();
         $this->genericModel = new GenericModel();
         $this->getAll = 'SELECT * FROM categories';
     }

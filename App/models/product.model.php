@@ -5,6 +5,7 @@ class ProductModel extends GenericModel
     private $genericModel, $getAll, $insert;
     public function __construct()
     {
+        parent::__construct();
         $this->genericModel = new GenericModel();
         $this->getAll = 'SELECT * FROM products';
         $this->insert = "INSERT INTO `products` (`name`, `price`, `stock`, `product_image`, `product_description`) VALUES ( ?, ?, ?, ?, ?)";
@@ -22,8 +23,7 @@ class ProductModel extends GenericModel
 
     public function getAllByCategory($id)
     {
-        $query = $this->genericModel->db->prepare('SELECT * FROM products WHERE id_categories = ?');
-        //$query = $this->db->prepare('SELECT * FROM products WHERE id_categories = ?');
+        $query = $this->db->prepare('SELECT * FROM products WHERE id_categories = ?');
         $query->execute([$id]);
 
         return $query->fetchAll(PDO::FETCH_OBJ);
