@@ -4,10 +4,11 @@
         <div class="card col g-4">
             <img src="<?= $product->product_image ?>" class="card-img-top" alt="<?= $product->product_description ?>">
             <div class="card-body">
-                <h5 class="card-title"><?= $product->name ?></h5>
+                <h5 class="card-title"><?= $product->productName ?></h5>
                 <p class="card-text"><?= $product->product_description ?></p>
                 <p><?= $product->stock ?></p>
                 <p><?= $product->price ?></p>
+                <span class="badge text-bg-secondary"><?= $product->categoryName ?></span>
             </div>
         </div>
     <?php endforeach ?>

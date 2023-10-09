@@ -59,6 +59,21 @@ switch ($params[0]) {
     case 'addShop':
         $shopController->showShopPageAdministration();
         break;
+    case 'adminCategories':
+        $categoryController->showCategoriesAdministration();
+        break;
+    case 'editCategory':
+        $categoryController->showEditCategory($params[1]);
+        break;
+    case 'updateCategory':
+        $categoryController->updateCategory($params[1]);
+        break;
+    case 'deleteCategory':
+        $categoryController->deleteCategory($params[1]);
+        break;
+    case 'addCategory':
+        $categoryController->insertCategory();
+        break;
     default:
         $genericController->showError('404 not found');
         break;

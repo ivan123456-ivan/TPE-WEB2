@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-10-2023 a las 23:55:15
+-- Tiempo de generación: 09-10-2023 a las 20:30:27
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -51,8 +51,8 @@ CREATE TABLE `products` (
   `name` varchar(45) NOT NULL,
   `price` float NOT NULL,
   `stock` int(11) NOT NULL,
-  `id_categories` int(11) DEFAULT NULL,
-  `id_shops` int(11) DEFAULT NULL,
+  `id_categories` int(11) NOT NULL,
+  `id_shops` int(11) NOT NULL,
   `product_image` varchar(250) NOT NULL,
   `product_description` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -62,10 +62,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `price`, `stock`, `id_categories`, `id_shops`, `product_image`, `product_description`) VALUES
-(5, 'Hamburguesa', 2500, 24, 2, NULL, 'https://s3.abcstatics.com/media/gurme/2023/08/31/s/smash-burger.jpg-kbOC--940x529@abc.jpg', 'Esto es una hamburguesa'),
-(7, 'Pizza', 3000, 24, 1, NULL, 'https://www.allrecipes.com/thmb/ooZbu_yUBrGQ74uKbuOENWuNxMM=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/48727-Mikes-homemade-pizza-DDMFS-beauty-4x3-BG-2974-a7a9842c14e34ca699f3b7d7143256cf.jpg', 'Esto es una pizza.'),
-(9, 'Hamburguesa doble', 2700, 24, 2, NULL, 'https://d31npzejelj8v1.cloudfront.net/media/recipemanager/recipe/1687289598_doble-carne.jpg', 'Esto es una hamburguesa doble'),
-(11, 'Otra Pizza', 2300, 24, 1, NULL, 'https://sivarious.com/wp-content/uploads/2023/04/Pizza-prosciutto.jpg', 'Esto es una pizza');
+(5, 'Hamburguesa', 2500, 24, 2, 0, 'https://s3.abcstatics.com/media/gurme/2023/08/31/s/smash-burger.jpg-kbOC--940x529@abc.jpg', 'Esto es una hamburguesa'),
+(7, 'Pizza', 3000, 24, 1, 0, 'https://www.allrecipes.com/thmb/ooZbu_yUBrGQ74uKbuOENWuNxMM=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/48727-Mikes-homemade-pizza-DDMFS-beauty-4x3-BG-2974-a7a9842c14e34ca699f3b7d7143256cf.jpg', 'Esto es una pizza.'),
+(9, 'Hamburguesa doble', 2700, 24, 2, 0, 'https://d31npzejelj8v1.cloudfront.net/media/recipemanager/recipe/1687289598_doble-carne.jpg', 'Esto es una hamburguesa doble'),
+(11, 'Otra Pizza', 2300, 24, 1, 0, 'https://sivarious.com/wp-content/uploads/2023/04/Pizza-prosciutto.jpg', 'Esto es una pizza');
 
 -- --------------------------------------------------------
 
@@ -112,7 +112,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `user`, `password`, `rol`) VALUES
 (1, 'webadmin', '$2y$10$Onrd4KZg.JXFYEu37G7jNet3SxLDJM0v5odG81GclE1I3INa8mOei', '1'),
 (5, 'UsuarioDePrueba', '$2y$10$YbRzpG0QO3CrJ.3GxO3y5eF4WnM8f5O0.Gx4mkEjmy4DB.uabG3wq', '0'),
-(6, 'UsuarioDePrueba2', '$2y$10$ZirgpYtDE86EA8QDwZzacOBUb2MRJfVwC89t.dE8gHijbNyzqUOtO', '0');
+(6, 'UsuarioDePrueba2', '$2y$10$ZirgpYtDE86EA8QDwZzacOBUb2MRJfVwC89t.dE8gHijbNyzqUOtO', '0'),
+(7, 'ivan', '$2y$10$wuPPlJ.iumYv5qMmGdLD0uCwVCPg8paJXYVDVW43nUM4RZKeVf5yO', '');
 
 --
 -- Índices para tablas volcadas
@@ -130,9 +131,8 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nombre_UNIQUE` (`name`),
   ADD KEY `categoria_id_idx` (`id_categories`),
-  ADD KEY `fk_productos_comercios1_idx` (`id_shops`);
+  ADD KEY `fk_productos_comercios1_idx` (`id_shops`) USING BTREE;
 
 --
 -- Indices de la tabla `shops`
@@ -155,7 +155,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
@@ -173,7 +173,7 @@ ALTER TABLE `shops`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas

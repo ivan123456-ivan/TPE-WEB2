@@ -13,9 +13,6 @@ class ProductController
         $this->modelCategories = new CategoryModel();
     }
 
-    // public function showProductRegister(){
-    //     $categories = $this->model->getAll();
-    // }
     public function showProductPage($search = null)
     {
         $products = $this->model->getAllProduct();
@@ -32,8 +29,7 @@ class ProductController
         if ($_POST) {
             $category = $_POST['select-categories'];
             if (isset($category) && is_numeric($category)) {
-                $search = $this->model->getAllByCategory($category);
-                $this->showProductPage($search);
+                $this->showProductPage($this->model->getAllByCategory($category));
             } else {
                 header('Location: ' . BASE_URL . 'productPage');
             }
@@ -53,13 +49,9 @@ class ProductController
             $productImage = $_POST['productImage'];
             $productPrice = $_POST['productPrice'];
             $productStock = $_POST['productStock'];
-            $this->model->addProduct([$productName, $productPrice, $productStock, $productImage, $productDescription]);
+            $productCategory = $_POST['select-categories'];
+            AuthHelper::init();
+            $this->model->addProduct([$productName, $productPrice, $productStock, $productCategory, $_SESSION['ID_USER'], $productImage, $productDescription]);
         }
-    }
-
-    public function showAllProduct()
-    {
-        $query = $this->model->getAllProduct();
-        // $this->view->showProductPage($query);
     }
 }
