@@ -39,7 +39,8 @@
 
                 <!-- Elementos a la derecha -->
                 <ul class="navbar-nav ml-auto">
-                    <?php if (!isset($_SESSION['logueado'])) : ?><!-- aca hay que comprobar si el usuario no está logueado -->
+                    <?php AuthHelper::init();
+                    if (!isset($_SESSION['USER_NAME'])) : ?><!-- aca hay que comprobar si el usuario no está logueado -->
                         <li class="nav-item">
                             <a class="nav-link" href="signup">Sign Up</a>
                         </li>
@@ -50,11 +51,20 @@
                     else :
                     ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="signout">Sign Out</a>
+                            <a class="nav-link" href="dashboard">Dashboard</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="productPageAdministration">Products administration</a>
-                        </li>
+                        <div class="dropdown">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Administration
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="adminProduct">Admin Products</a></li>
+                                <li><a class="dropdown-item" href="adminCategories">Admin Categories</a></li>
+                                <li><a class="dropdown-item" href="addShop">Create Shop</a></li>
+                                <li><a class="dropdown-item" href="signout">Sign Out</a></li>
+                            </ul>
+                        </div>
                     <?php endif ?>
                 </ul>
             </div>

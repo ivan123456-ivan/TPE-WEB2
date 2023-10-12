@@ -20,10 +20,11 @@ class ShopController
 
     public function showShopPageAdministration()
     {
+        AuthHelper::verify();
         if ($_POST) {
             foreach ($_POST as $value) {
                 if (!isset($value) || empty($value)) {
-                    $this->genericView->showError('the fields were not completed correctly.');
+                    $this->genericView->showError('the fields were not completed correctly');
                     header('Refresh: 5; URL=' . BASE_URL . 'addShop');
                     die();
                 }
@@ -31,9 +32,9 @@ class ShopController
             $nombre = $_POST['shopName'];
             $address = $_POST['shopAddress'];
             $shopImage = $_POST['shopImage'];
-            $id = $this->model->insertShop($nombre, $address, $shopImage);
+            $id = $this->model->insertShop($nombre, $address, $shopImage, $_SESSION['USER_ID']);
             if ($id) {
-                $this->genericView->showSuccess('successful operation.');
+                $this->genericView->showSuccess('successful operation');
                 header('Refresh: 5; URL=' . BASE_URL . 'shopPage');
             }
         } else {

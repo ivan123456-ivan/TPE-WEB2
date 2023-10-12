@@ -17,7 +17,7 @@ class ProductModel extends GenericModel
 
     public function getAllProduct()
     {
-        $query = $this->db->prepare('SELECT p.name AS productName, p.id AS idProduct, p.price, p.stock, p.product_image, p.product_description, c.id AS idCategory, c.name AS categoryName FROM products AS p INNER JOIN categories AS c ON p.id_categories = c.id');
+        $query = $this->db->prepare('SELECT p.name AS productName, p.id AS idProduct, p.price, p.stock, p.product_image, p.product_description, c.id AS idCategory, c.name AS categoryName, s.name AS shopName, s.id AS shopId FROM products AS p INNER JOIN categories AS c ON p.id_categories = c.id INNER JOIN shops AS s ON p.id_shops = s.id');
         $query->execute();
 
         return $query->fetchAll(PDO::FETCH_OBJ);

@@ -44,7 +44,7 @@ switch ($params[0]) {
     case 'createUser':
         $userController->createUser();
         break;
-    case 'addProduct':
+    case 'adminProduct':
         $categoryController->showCategories();
         $productController->getAllData();
         break;
@@ -76,8 +76,13 @@ switch ($params[0]) {
     case 'addCategory':
         $categoryController->insertCategory();
         break;
-    case 'user':
-        $authController->auth();
+    case 'dashboard':
+        $user = $authController->auth();
+        $shops = $userController->showShopsForUser();
+        $userController->showDashboard($user, $shops);
+        break;
+    case 'signout':
+        $authController->signOut();
         break;
     default:
         $genericController->showError('404 not found');

@@ -1,14 +1,15 @@
 <?php
 
-class UserView{
+class UserView
+{
 
 
-    public function showUser($userName = null){
+    public function showUser($user, $shops)
+    {
         AuthHelper::init();
+        $title = 'dashboard';
         require './Templates/header.phtml';
         require './Templates/user.phtml';
         require './Templates/footer.phtml';
     }
 }
-
-?>

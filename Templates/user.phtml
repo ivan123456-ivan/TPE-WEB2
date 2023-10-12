@@ -1,1 +1,13 @@
-<h1>Bienvenido <?= $userName ?></h1>
+<h1>Welcome <?= $_SESSION['USER_NAME'] ?></h1>
+
+<?php
+if ($shops) : ?>
+    <h3 class="text-muted text-center">Your´s shops are:</h4>
+    <?php
+else :
+    ?>
+        <h3>You don´t have any shop.</h3>
+    <?php
+endif;
+    ?>
+    <?php require_once './Templates/shop.phtml' ?>

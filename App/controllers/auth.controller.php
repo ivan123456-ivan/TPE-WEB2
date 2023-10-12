@@ -3,34 +3,44 @@ require_once './App/helpers/auth.helper.php';
 require_once './App/models/user.model.php';
 require_once './App/views/generic.view.php';
 require_once './App/views/user.view.php';
-class AuthController{
+class AuthController
+{
     private $userModel, $genericView;
-    public function __construct(){
+    public function __construct()
+    {
         $this->userModel = new UserModel();
         $this->genericView = new GenericView();
     }
 
-    public function auth(){
-        $userName = $_POST['userName'];
-        $password = $_POST['userPassword'];
+    public function auth()
+    {
+        if ($_POST) {
 
-        if(empty($userName) || empty($password)){
-            return;
-        }
-        $user = $this->userModel->getAllDataUser($userName);
+            $userName = $_POST['userName'];
+            $password = $_POST['userPassword'];
 
-        if($user && password_verify($password, $user->password)){
+            if (empty($userName) || empty($password)) {
+                return;
+            }
+            $user = $this->userModel->getAllDataUser($userName);
 
-            AuthHelper::signIn($user);
+            if ($user && password_verify($password, $user->password)) {
 
-            header('Location: ' . BASE_URL . 'user');
-        }else{
-            $this->genericView->showError("Error");
+                AuthHelper::signIn($user);
+
+                return $user;
+            } else {
+                $this->genericView->showError("Error");
+            }
+        } else {
+            AuthHelper::verify();
+            return $_SESSION;
         }
     }
 
-    public function closeSession(){
+    public function signOut()
+    {
         AuthHelper::logout();
-        header('Location: '. BASE_URL . 'home');
+        header('Location: ' . BASE_URL . 'home');
     }
 }

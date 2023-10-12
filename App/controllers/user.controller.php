@@ -4,12 +4,14 @@ require_once './App/views/user.view.php';
 
 class UserController
 {
-    private $model, $view;
+    private $model, $view, $genericView, $shopModel;
 
     public function __construct()
     {
         $this->model = new UserModel();
         $this->view = new UserView();
+        $this->genericView = new GenericView();
+        $this->shopModel = new ShopModel();
     }
 
     public function createUser()
@@ -25,4 +27,27 @@ class UserController
         }
     }
 
+    public function showShopsForUser()
+    {
+        return $this->shopModel->getAllShopsForUser($_SESSION['USER_ID']);
+    }
+
+    public function showDashboard($user, $shops)
+    {
+        AuthHelper::verify();
+        if ($this->checkSignIn() !== false) {
+            $this->view->showUser($user, $shops);
+        } else {
+            $this->genericView->showError('La sesión expiró.');
+        }
+    }
+
+    public function checkSignIn()
+    {
+        if (AuthHelper::isLoggedIn() === false) {
+            AuthHelper::logout();
+            header('Refresh: 3; URL=' . BASE_URL . 'signin');
+            return false;
+        }
+    }
 }

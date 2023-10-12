@@ -18,24 +18,28 @@ class CategoryController
 
     public function showCategories()
     {
+        AuthHelper::verify();
         $categories = $this->model->getAllCategories();
         $this->viewProduct->showProductRegister($categories);
     }
 
     public function showCategoriesAdministration()
     {
+        AuthHelper::verify();
         $categories = $this->model->getAllCategories();
         $this->view->showCategoriesAdministration($categories);
     }
 
     public function showEditCategory($id)
     {
+        AuthHelper::verify();
         $categories = $this->model->getAllCategories();
         $this->view->showCategoriesAdministration($categories, $id);
     }
 
     public function updateCategory($id)
     {
+        AuthHelper::verify();
         if ($_POST) {
             $name = $_POST['categoryName'];
             if (isset($name) && !empty($name)) {
@@ -51,6 +55,7 @@ class CategoryController
 
     public function deleteCategory($id)
     {
+        AuthHelper::verify();
         if ($id) {
             $this->model->deleteCategory($id);
             $this->genericView->showSuccess('category deleted successfully');
@@ -63,6 +68,7 @@ class CategoryController
 
     public function insertCategory()
     {
+        AuthHelper::verify();
         if ($_POST) {
             $name = $_POST['categoryName'];
             if (isset($name) && !empty($name)) {
