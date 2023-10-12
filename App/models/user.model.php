@@ -17,7 +17,7 @@ class UserModel extends GenericModel
 
     public function insertUser($user, $passwordHashed)
     {
-        $query = $this->db->prepare("INSERT INTO `users` (`user`, `password`) VALUES (?, ?)");
+        $query = $this->db->prepare("INSERT INTO `user` (`user`, `password`) VALUES (?, ?)");
         $query->execute([$user, $passwordHashed]);
 
         return $this->db->lastInsertId();
