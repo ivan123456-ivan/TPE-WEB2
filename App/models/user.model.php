@@ -2,22 +2,24 @@
 require_once './App/models/generic.model.php';
 class UserModel extends GenericModel
 {
-    private $insert, $getAll, $genericModel;
     public function __construct()
     {
         parent::__construct();
-        $this->insert = "INSERT INTO `users` (`user`, `password`) VALUES (?, ?)";
-        $this->getAll = 'SELECT * FROM `users` WHERE ?';
-        $this->genericModel = new GenericModel();
     }
 
-    public function getAllDataUser()
+    public function getAllDataUser($id)
     {
-        return $this->genericModel->getAll($this->getAll);
+        $query = $this->db->prepare('SELECT * FROM `users` WHERE id = ?');
+        $query->execute([$id]);
+
+        return $query->fetch(PDO::FETCH_OBJ);
     }
 
-    public function insertUser($array)
+    public function insertUser($user, $passwordHashed)
     {
-        return $this->genericModel->insert($array, $this->insert);
+        $query = $this->db->prepare("INSERT INTO `users` (`user`, `password`) VALUES (?, ?)");
+        $query->execute([$user, $passwordHashed]);
+
+        return $this->db->lastInsertId();
     }
 }

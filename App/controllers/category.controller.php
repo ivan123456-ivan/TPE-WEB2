@@ -3,6 +3,7 @@ require_once './App/models/category.model.php';
 require_once './App/views/product.view.php';
 require_once './App/views/category.view.php';
 require_once './App/views/generic.view.php';
+require_once './App/controllers/product.controller.php';
 class CategoryController
 {
     private $model, $viewProduct, $view, $genericView;
@@ -38,7 +39,7 @@ class CategoryController
         if ($_POST) {
             $name = $_POST['categoryName'];
             if (isset($name) && !empty($name)) {
-                $this->model->updateCategory([$name, $id]);
+                $this->model->updateCategory($name, $id);
                 $this->genericView->showSuccess('category edited successfully');
                 header('Refresh: 3; URL=' . BASE_URL . 'adminCategories');
             } else {

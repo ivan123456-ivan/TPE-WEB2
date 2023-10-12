@@ -31,7 +31,7 @@ class ShopController
             $nombre = $_POST['shopName'];
             $address = $_POST['shopAddress'];
             $shopImage = $_POST['shopImage'];
-            $id = $this->model->insertShop([$nombre, $address, $shopImage]);
+            $id = $this->model->insertShop($nombre, $address, $shopImage);
             if ($id) {
                 $this->genericView->showSuccess('successful operation.');
                 header('Refresh: 5; URL=' . BASE_URL . 'shopPage');

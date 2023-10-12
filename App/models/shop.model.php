@@ -2,22 +2,24 @@
 require_once './App/models/generic.model.php';
 class ShopModel extends GenericModel
 {
-    private $genericModel, $getAll, $insert;
     public function __construct()
     {
         parent::__construct();
-        $this->genericModel = new GenericModel();
-        $this->getAll = 'SELECT * FROM shops';
-        $this->insert = 'INSERT INTO shops(name, address, shop_image)VALUES(?, ?, ?)';
     }
 
     public function getAllShops()
     {
-        return $this->genericModel->getAll($this->getAll);
+        $query = $this->db->prepare('SELECT * FROM shops');
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function insertShop($array)
+    public function insertShop($nombre, $address, $shopImage)
     {
-        return $this->genericModel->insert($array, $this->insert);
+        $query = $this->db->prepare('INSERT INTO shops(name, address, shop_image)VALUES(?, ?, ?)');
+        $query->execute([$nombre, $address, $shopImage]);
+
+        return $this->db->lastInsertId();
     }
 }

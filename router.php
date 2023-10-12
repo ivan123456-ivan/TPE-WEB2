@@ -48,10 +48,11 @@ switch ($params[0]) {
         $productController->getAllData();
         break;
     case 'productPage':
-        $productController->showProductPage();
-        break;
     case 'searchByCategory':
         $productController->searchByCategory();
+        if (!$_POST) {
+            $productController->showProductPage();
+        }
         break;
     case 'shopPage':
         $shopController->showShopPage();

@@ -2,6 +2,7 @@
 require_once './App/models/product.model.php';
 require_once './App/views/product.view.php';
 require_once './App/models/category.model.php';
+require_once './App/controllers/category.controller.php';
 class ProductController
 {
     private $model, $view, $modelCategories;
@@ -16,24 +17,9 @@ class ProductController
     public function showProductPage($search = null)
     {
         $products = $this->model->getAllProduct();
-        if ($search) {
-            $products = [];
-            $products = $search;
-        }
+        $products = $this->checkCategory($search, $products);
         $categories = $this->modelCategories->getAllCategories();
         $this->view->showProductPage($products, $categories);
-    }
-
-    public function searchByCategory()
-    {
-        if ($_POST) {
-            $category = $_POST['select-categories'];
-            if (isset($category) && is_numeric($category)) {
-                $this->showProductPage($this->model->getAllByCategory($category));
-            } else {
-                header('Location: ' . BASE_URL . 'productPage');
-            }
-        }
     }
 
     public function showProductPageAdministration()
@@ -51,7 +37,28 @@ class ProductController
             $productStock = $_POST['productStock'];
             $productCategory = $_POST['select-categories'];
             AuthHelper::init();
-            $this->model->addProduct([$productName, $productPrice, $productStock, $productCategory, $_SESSION['ID_USER'], $productImage, $productDescription]);
+            $this->model->addProduct($productName, $productPrice, $productStock, $productCategory, $productImage, $productDescription);
         }
+    }
+
+    public function searchByCategory()
+    {
+        if ($_POST) {
+            $category = $_POST['select-categories'];
+            if (isset($category) && is_numeric($category)) {
+                $this->showProductPage($this->modelCategories->getAllByCategory($category));
+            } else {
+                header('Location: ' . BASE_URL . 'productPage');
+            }
+        }
+    }
+
+    public function checkCategory($search, $products)
+    {
+        if ($search) {
+            $products = [];
+            $products = $search;
+        }
+        return $products;
     }
 }
