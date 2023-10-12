@@ -1,10 +1,13 @@
 <?php
 require_once './App/helpers/auth.helper.php';
 require_once './App/models/user.model.php';
+require_once './App/views/generic.view.php';
+require_once './App/views/user.view.php';
 class AuthController{
-    private $userModel;
+    private $userModel, $genericView;
     public function __construct(){
         $this->userModel = new UserModel();
+        $this->genericView = new GenericView();
     }
 
     public function auth(){
@@ -21,6 +24,8 @@ class AuthController{
             AuthHelper::signIn($user);
 
             header('Location: ' . BASE_URL . 'user');
+        }else{
+            $this->genericView->showError("Error");
         }
     }
 
@@ -28,5 +33,4 @@ class AuthController{
         AuthHelper::logout();
         header('Location: '. BASE_URL . 'home');
     }
-    
 }

@@ -24,8 +24,5 @@ class UserController
             header('Location: ' . BASE_URL . 'signup');
         }
     }
-    public function showUserPage(){
-        $this->view->showUser($userName);
-    }
 
 }

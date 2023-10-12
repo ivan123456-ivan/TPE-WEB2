@@ -13,7 +13,7 @@
 require_once './App/controllers/product.controller.php';
 require_once './App/controllers/shop.controller.php';
 require_once './App/controllers/user.controller.php';
-require_once './App/controllers/auth.cotroller.php';
+require_once './App/controllers/auth.controller.php';
 require_once './App/controllers/category.controller.php';
 require_once './App/controllers/generic.controller.php';
 
@@ -78,7 +78,6 @@ switch ($params[0]) {
         break;
     case 'user':
         $authController->auth();
-        $userController->showUserPage();
         break;
     default:
         $genericController->showError('404 not found');
