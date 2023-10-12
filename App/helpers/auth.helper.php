@@ -8,6 +8,12 @@ class AuthHelper
             session_start();
         }
     }
+    public static function signIn($user){
+        AuthHelper::init();
+        $_SESSION['USER_NAME'] = $user->user;
+        $_SESSION['USER_PASSWORD'] = $user->password;
+    }
+
     public static function logout()
     {
         AuthHelper::init();

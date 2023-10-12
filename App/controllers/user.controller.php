@@ -1,6 +1,7 @@
 <?php
 require_once './App/models/user.model.php';
 require_once './App/views/user.view.php';
+
 class UserController
 {
     private $model, $view;
@@ -23,4 +24,8 @@ class UserController
             header('Location: ' . BASE_URL . 'signup');
         }
     }
+    public function showUserPage(){
+        $this->view->showUser($userName);
+    }
+
 }

@@ -7,10 +7,10 @@ class UserModel extends GenericModel
         parent::__construct();
     }
 
-    public function getAllDataUser($id)
+    public function getAllDataUser($userName)
     {
-        $query = $this->db->prepare('SELECT * FROM `users` WHERE id = ?');
-        $query->execute([$id]);
+        $query = $this->db->prepare('SELECT * FROM `user` WHERE user = ?');
+        $query->execute([$userName]);
 
         return $query->fetch(PDO::FETCH_OBJ);
     }

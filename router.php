@@ -28,6 +28,7 @@ $userController = new UserController();
 $shopController = new ShopController();
 $productController = new ProductController();
 $categoryController = new CategoryController();
+$authController = new AuthController();
 // parsea la accion Ej: noticia/1 --> ['noticia', 1]
 $params = explode('/', $action);
 switch ($params[0]) {
@@ -74,6 +75,10 @@ switch ($params[0]) {
         break;
     case 'addCategory':
         $categoryController->insertCategory();
+        break;
+    case 'user':
+        $authController->auth();
+        $userController->showUserPage();
         break;
     default:
         $genericController->showError('404 not found');
