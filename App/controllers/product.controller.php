@@ -2,16 +2,19 @@
 require_once './App/models/product.model.php';
 require_once './App/views/product.view.php';
 require_once './App/models/category.model.php';
-require_once './App/controllers/category.controller.php';
+require_once './App/models/shop.model.php';
+require_once './App/views/generic.view.php';
 class ProductController
 {
-    private $model, $view, $modelCategories;
+    private $model, $view, $modelCategories, $modelShop, $genericView;
 
     public function __construct()
     {
         $this->model = new ProductModel();
         $this->view = new ProductView();
         $this->modelCategories = new CategoryModel();
+        $this->modelShop = new ShopModel();
+        $this->genericView = new GenericView();
     }
 
     public function showProductPage($search = null)
@@ -22,9 +25,13 @@ class ProductController
         $this->view->showProductPage($products, $categories);
     }
 
-    public function showProductPageAdministration()
+    public function showProductPageAdministration($search = null)
     {
-        $this->view->showProductPageAdministration();
+        AuthHelper::verify();
+        $products = $this->model->getAllProductsForUser($_SESSION['USER_ID']);
+        //$products = $this->checkCategory($search, $products);
+        $categories = $this->modelCategories->getAllCategories();
+        $this->view->showProductPageAdministration($products, $categories);
     }
 
     public function getAllData()
@@ -37,7 +44,36 @@ class ProductController
             $productStock = $_POST['productStock'];
             $productCategory = $_POST['select-categories'];
             AuthHelper::init();
-            $this->model->addProduct($productName, $productPrice, $productStock, $productCategory, $productImage, $productDescription);
+            $id_shops = $this->modelShop->getShopIdForUser($_SESSION['USER_ID']);
+            $this->model->addProduct($productName, $productPrice, $productStock, $id_shops, $productCategory, $productImage, $productDescription);
+            header('Location: ' . BASE_URL . 'adminProduct');
+        }else{
+            $this->genericView->showError("No se ha podido crear el producto");
+        }
+    }
+    public function showProduct(){
+        AuthHelper::verify();
+        $products = $this->model->getAllProductsForUser($_SESSION['USER_ID']);
+        $categories = $this->modelCategories->getAllCategories();
+        $this->view->showProductPageAdministration($products, $categories);
+    }
+    public function deleteProduct($idProduct){
+        $query = $this->model->deleteProduct($idProduct);
+        $this->genericView->showSuccess("The product has been successfully deleted.");
+        header('Refresh: 3; URL=' . BASE_URL . 'adminProduct');
+    }
+
+
+    public function updateProduct(){
+        if($_POST){
+            $productName = $_POST['productName'];
+            $productPrice = $_POST['productPrice'];
+            $productStock = $_POST['productStock'];
+            $productCategory = $_POST['select-categories'];
+            $productImage = $_POST['productImage'];
+            $productDescription = $_POST['productDescription'];
+            $idProduct = $_POST['select-products'];
+            $this->model->updateProduct($productName, $productPrice, $productStock, $productCategory, $productImage, $productDescription, $idProduct);
         }
     }
 

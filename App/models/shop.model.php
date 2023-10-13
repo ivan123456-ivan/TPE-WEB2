@@ -30,4 +30,22 @@ class ShopModel extends GenericModel
 
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
+    public function getShopIdForUser($user_id)
+{
+    $query = $this->db->prepare('SELECT id FROM shops WHERE id_users = ?');
+    $query->execute([$user_id]);
+
+    // Obtener el valor de id_shops (suponiendo que haya solo un resultado)
+    $result = $query->fetch(PDO::FETCH_OBJ);
+
+    // Verificar si se encontró un resultado
+    if ($result) {
+        return $result->id;
+    } else {
+        // Si no se encuentra un resultado, puedes manejarlo de la manera que prefieras
+        // Por ejemplo, lanzar una excepción o devolver un valor predeterminado
+        // Aquí se lanza una excepción como ejemplo
+        throw new Exception("No commerce was found for the user.");
+    }
+}
 }

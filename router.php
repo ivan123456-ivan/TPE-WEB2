@@ -45,8 +45,16 @@ switch ($params[0]) {
         $userController->createUser();
         break;
     case 'adminProduct':
-        $categoryController->showCategories();
+        $productController->showProductPageAdministration();
+        break;
+    case 'addProduct':
         $productController->getAllData();
+        break;
+    case 'editProduct':
+        $productController->updateProduct();
+        break;
+    case 'deleteProduct':
+        $productController->deleteProduct($params[1]);
         break;
     case 'productPage':
     case 'searchByCategory':

@@ -1,26 +1,81 @@
-<div class="container d-flex justify-content-center h-100 w-100">
-  <form method="POST" action="addProduct" class="d-flex flex-column h-100 w-50 align-items-center">
-    <div class="mb-3 w-100">
-      <label for="productName" class="form-label">Product name</label>
-      <input type="text" name="productName" class="form-control" id="ProductName">
-    </div>
-    <div class="mb-3 w-100">
-      <label for="productDescription" class="form-label">Product description</label>
-      <input type="text" name="productDescription" class="form-control" id="productDescription">
-    </div>
-    <div class="mb-3 w-100">
-      <label for="imageURL" class="form-label">URL product</label>
-      <input type="text" name="productImage" class="form-control" id="imageURL">
-    </div>
-    <?php require './Templates/selectCategories.phtml' ?>
-    <div class="mb-3 w-100">
-      <label for="productPrice" class="form-label">Product price</label>
-      <input type="number" name="productPrice" class="form-control" id="productPrice">
-    </div>
-    <div class="mb-3 w-100">
-      <label for="productStock" class="form-label">Product Stock</label>
-      <input type="number" name="productStock" class="form-control" id="productStock">
-    </div>
-    <button type="submit" class="btn btn-primary">add Product</button>
-  </form>
+<div class="container d-flex flex-column justify-content-center h-100 w-100">
+  <div class="container d-flex justify-content-center h-100 w-100">
+    <form method="POST" action="addProduct" class="d-flex flex-column h-100 w-50 align-items-center mx-3">
+      <div class="mb-3 w-100">
+        <label for="productName" class="form-label">Product name</label>
+        <input type="text" name="productName" class="form-control" id="ProductName">
+      </div>
+      <div class="mb-3 w-100">
+        <label for="productDescription" class="form-label">Product description</label>
+        <input type="text" name="productDescription" class="form-control" id="productDescription">
+      </div>
+      <div class="mb-3 w-100">
+        <label for="imageURL" class="form-label">URL product</label>
+        <input type="text" name="productImage" class="form-control" id="imageURL">
+      </div>
+      <?php require './Templates/selectCategories.phtml' ?>
+      <div class="mb-3 w-100">
+        <label for="productPrice" class="form-label">Product price</label>
+        <input type="number" name="productPrice" class="form-control" id="productPrice">
+      </div>
+      <div class="mb-3 w-100">
+        <label for="productStock" class="form-label">Product Stock</label>
+        <input type="number" name="productStock" class="form-control" id="productStock">
+      </div>
+      <button type="submit" class="btn btn-primary">add Product</button>
+    </form>
+
+    <form method="POST" action="editProduct" class="d-flex flex-column h-100 w-50 align-items-center mx-3">
+      <div class="mb-3 w-100">
+        <label for="productName" class="form-label">Product name</label>
+        <input type="text" name="productName" class="form-control" id="ProductName">
+      </div>
+      <div class="mb-3 w-100">
+        <label for="productDescription" class="form-label">Product description</label>
+        <input type="text" name="productDescription" class="form-control" id="productDescription">
+      </div>
+      <div class="mb-3 w-100">
+        <label for="imageURL" class="form-label">URL product</label>
+        <input type="text" name="productImage" class="form-control" id="imageURL">
+      </div>
+      <?php require './Templates/selectCategories.phtml' ?>
+      <div class="mb-3 w-100">
+        <label for="productPrice" class="form-label">Product price</label>
+        <input type="number" name="productPrice" class="form-control" id="productPrice">
+      </div>
+      <div class="mb-3 w-100">
+        <label for="productStock" class="form-label">Product Stock</label>
+        <input type="number" name="productStock" class="form-control" id="productStock">
+      </div>
+      <?php require './Templates/productSelect.phtml' ?>
+      <button type="submit" class="btn btn-primary">Edit Product</button>
+    </form>
+  </div>
+  <div class="container w-100 row row-cols-3">
+    <?php
+    foreach ($products as $product) :
+    ?>
+        <div class="card col g-4">
+            <img src="<?= $product->product_image ?>" class="card-img-top" alt="<?= $product->product_description ?>">
+            <div class="card-body">
+                <h5 class="card-title"><?= $product->productName ?></h5>
+                <p class="card-text"><?= $product->product_description ?></p>
+                <?php if ($product->stock > 0) : ?>
+                    <p>Stock: <?= $product->stock ?></p>
+                <?php
+                else :
+                ?>
+                    <p class="text-muted">No hay stock</p>
+                <?php
+                endif;
+                ?>
+                <p>$ <?= $product->price ?></p>
+                <span class="badge text-bg-secondary"><?= $product->categoryName ?></span>
+                <a href="showProducts/<?= $product->shopId ?>"><span class="badge text-bg-primary"><?= $product->shopName ?></span></a>
+                <a href="deleteProduct/<?= $product->idProduct?>" class="btn btn-primary">Delete</a>
+            </div>
+        </div>
+    <?php endforeach ?>
+</div>
+
 </div>

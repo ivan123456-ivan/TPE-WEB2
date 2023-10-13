@@ -1,10 +1,12 @@
 <?php
 require_once './App/models/user.model.php';
 require_once './App/views/user.view.php';
+require_once './App/models/shop.model.php';
+require_once './App/models/product.model.php';
 
 class UserController
 {
-    private $model, $view, $genericView, $shopModel;
+    private $model, $view, $genericView, $shopModel, $productModel;
 
     public function __construct()
     {
@@ -12,6 +14,7 @@ class UserController
         $this->view = new UserView();
         $this->genericView = new GenericView();
         $this->shopModel = new ShopModel();
+        $this->productModel = new ProductModel();
     }
 
     public function createUser()
@@ -31,7 +34,7 @@ class UserController
     {
         return $this->shopModel->getAllShopsForUser($_SESSION['USER_ID']);
     }
-
+    
     public function showDashboard($user, $shops)
     {
         AuthHelper::verify();
