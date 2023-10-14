@@ -25,11 +25,10 @@ class ProductController
         $this->view->showProductPage($products, $categories);
     }
 
-    public function showProductPageAdministration($search = null)
+    public function showProductPageAdministration()
     {
         AuthHelper::verify();
         $products = $this->model->getAllProductsForUser($_SESSION['USER_ID']);
-        //$products = $this->checkCategory($search, $products);
         $categories = $this->modelCategories->getAllCategories();
         $shops = $this->modelShop->getAllShopsForUser($_SESSION['USER_ID']);
         $this->view->showProductPageAdministration($products, $categories, $shops);
@@ -39,6 +38,7 @@ class ProductController
     {
         AuthHelper::verify();
         if ($_POST) {
+            GenericController::checkValuesPost();
             $productName = $_POST['productName'];
             $productDescription = $_POST['productDescription'];
             $productImage = $_POST['productImage'];
@@ -48,27 +48,32 @@ class ProductController
             $id_shops = $_POST['select-shops'];
             $this->model->addProduct($productName, $productPrice, $productStock, $id_shops, $productCategory, $productImage, $productDescription);
             header('Location: ' . BASE_URL . 'adminProduct');
-        }else{
+        } else {
             $this->genericView->showError("No se ha podido crear el producto");
         }
     }
-    public function showProduct(){
+    public function showProduct()
+    {
         AuthHelper::verify();
         $products = $this->model->getAllProductsForUser($_SESSION['USER_ID']);
         $categories = $this->modelCategories->getAllCategories();
-        $this->view->showProductPageAdministration($products, $categories);
+        $shops = $this->modelShop->getAllShopsForUser($_SESSION['USER_ID']);
+        $this->view->showProductPageAdministration($products, $categories, $shops);
     }
-    public function deleteProduct($idProduct){
+    public function deleteProduct($idProduct)
+    {
         AuthHelper::verify();
-        $query = $this->model->deleteProduct($idProduct);
-        $this->genericView->showSuccess("The product has been successfully deleted.");
+        $this->model->deleteProduct($idProduct);
+        $this->genericView->showSuccess("The product has been successfully deleted");
         header('Refresh: 3; URL=' . BASE_URL . 'adminProduct');
     }
 
 
-    public function updateProduct(){
+    public function updateProduct()
+    {
         AuthHelper::verify();
-        if($_POST){
+        if ($_POST) {
+            GenericController::checkValuesPost();
             $productName = $_POST['productName'];
             $productPrice = $_POST['productPrice'];
             $productStock = $_POST['productStock'];

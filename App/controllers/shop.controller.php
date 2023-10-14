@@ -22,13 +22,7 @@ class ShopController
     {
         AuthHelper::verify();
         if ($_POST) {
-            foreach ($_POST as $value) {
-                if (!isset($value) || empty($value)) {
-                    $this->genericView->showError('the fields were not completed correctly');
-                    header('Refresh: 5; URL=' . BASE_URL . 'addShop');
-                    die();
-                }
-            }
+            GenericController::checkValuesPost();
             $nombre = $_POST['shopName'];
             $address = $_POST['shopAddress'];
             $shopImage = $_POST['shopImage'];
@@ -39,6 +33,41 @@ class ShopController
             }
         } else {
             $this->view->showShopPageAdministration();
+        }
+    }
+
+    public function deleteShop($id)
+    {
+        AuthHelper::verify();
+        if ($id) {
+            $this->model->deleteShop($id);
+            $this->genericView->showSuccess('shop deleted successfully');
+            header('Refresh: 3; URL=' . BASE_URL . 'dashboard');
+        } else {
+            $this->genericView->showError("could not delete shop");
+            header('Refresh: 5; URL=' . BASE_URL . 'dashboard');
+        }
+    }
+
+    public function editShop($id)
+    {
+        AuthHelper::verify();
+        if ($id) {
+            $shop = $this->model->getDataShop($id);
+            $this->view->showEditPage($shop);
+        }
+    }
+
+    public function updateShop($id)
+    {
+        if ($_POST) {
+            GenericController::checkValuesPost();
+            $name = $_POST['shopName'];
+            $address = $_POST['shopAddress'];
+            $image = $_POST['shopImage'];
+            $this->model->updateShop($id, $name, $address, $image);
+            $this->genericView->showSuccess('shop edited successfully');
+            header('Refresh: 3; URL=' . BASE_URL . 'dashboard');
         }
     }
 }

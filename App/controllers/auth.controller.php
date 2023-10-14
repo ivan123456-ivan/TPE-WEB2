@@ -20,7 +20,7 @@ class AuthController
             $password = $_POST['userPassword'];
 
             if (empty($userName) || empty($password)) {
-                return;
+                die();
             }
             $user = $this->userModel->getAllDataUser($userName);
 

@@ -92,6 +92,15 @@ switch ($params[0]) {
     case 'signout':
         $authController->signOut();
         break;
+    case 'deleteShop':
+        $shopController->deleteShop($params[1]);
+        break;
+    case 'editShop':
+        $shopController->editShop($params[1]);
+        break;
+    case 'updateShop':
+        $shopController->updateShop($params[1]);
+        break;
     default:
         $genericController->showError('404 not found');
         break;
