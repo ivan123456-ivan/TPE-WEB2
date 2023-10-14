@@ -16,7 +16,7 @@ class ProductView
         require './Templates/productPage.phtml';
         require './Templates/footer.phtml';
     }
-    public function showProductPageAdministration($products, $categories)
+    public function showProductPageAdministration($products, $categories, $shops)
     {
         $title = 'Products Administration';
         require './Templates/header.phtml';

@@ -31,11 +31,13 @@ class ProductController
         $products = $this->model->getAllProductsForUser($_SESSION['USER_ID']);
         //$products = $this->checkCategory($search, $products);
         $categories = $this->modelCategories->getAllCategories();
-        $this->view->showProductPageAdministration($products, $categories);
+        $shops = $this->modelShop->getAllShopsForUser($_SESSION['USER_ID']);
+        $this->view->showProductPageAdministration($products, $categories, $shops);
     }
 
     public function getAllData()
     {
+        AuthHelper::verify();
         if ($_POST) {
             $productName = $_POST['productName'];
             $productDescription = $_POST['productDescription'];
@@ -43,8 +45,7 @@ class ProductController
             $productPrice = $_POST['productPrice'];
             $productStock = $_POST['productStock'];
             $productCategory = $_POST['select-categories'];
-            AuthHelper::init();
-            $id_shops = $this->modelShop->getShopIdForUser($_SESSION['USER_ID']);
+            $id_shops = $_POST['select-shops'];
             $this->model->addProduct($productName, $productPrice, $productStock, $id_shops, $productCategory, $productImage, $productDescription);
             header('Location: ' . BASE_URL . 'adminProduct');
         }else{
@@ -58,6 +59,7 @@ class ProductController
         $this->view->showProductPageAdministration($products, $categories);
     }
     public function deleteProduct($idProduct){
+        AuthHelper::verify();
         $query = $this->model->deleteProduct($idProduct);
         $this->genericView->showSuccess("The product has been successfully deleted.");
         header('Refresh: 3; URL=' . BASE_URL . 'adminProduct');
@@ -65,6 +67,7 @@ class ProductController
 
 
     public function updateProduct(){
+        AuthHelper::verify();
         if($_POST){
             $productName = $_POST['productName'];
             $productPrice = $_POST['productPrice'];
@@ -74,6 +77,7 @@ class ProductController
             $productDescription = $_POST['productDescription'];
             $idProduct = $_POST['select-products'];
             $this->model->updateProduct($productName, $productPrice, $productStock, $productCategory, $productImage, $productDescription, $idProduct);
+            header('Refresh: 3; URL=' . BASE_URL . 'adminProduct');
         }
     }
 

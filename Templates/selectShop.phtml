@@ -1,0 +1,6 @@
+<select name="select-shops" class="form-select mb-4" aria-label="Default select example">
+    <option selected>Select shop</option>
+    <?php foreach ($shops as $shop) : ?>
+        <option value="<?= $shop->id ?>"><?= $shop->name ?></option>
+    <?php endforeach ?>
+</select>
