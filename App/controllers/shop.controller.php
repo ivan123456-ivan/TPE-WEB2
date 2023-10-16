@@ -1,21 +1,28 @@
 <?php
 require_once './App/models/shop.model.php';
 require_once './App/views/shop.view.php';
+require_once './App/models/product.model.php';
 class ShopController
 {
-    private $model, $view, $genericView;
+    private $model, $view, $genericView, $modelProduct;
 
     public function __construct()
     {
         $this->model = new ShopModel();
         $this->view = new ShopView();
         $this->genericView = new GenericView();
+        $this->modelProduct = new ProductModel();
     }
 
     public function showShopPage()
     {
         $shops = $this->model->getAllShops();
         $this->view->showShopPage($shops);
+    }
+
+    public function showSpecificShop($product){
+        $products = $this->modelProduct->getAllProductsForShop($product);
+        $this->view->showProductForShop($products);
     }
 
     public function showShopPageAdministration()

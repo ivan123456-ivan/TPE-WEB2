@@ -17,7 +17,14 @@ class ShopView
         require './Templates/registerShop.phtml';
         require './Templates/footer.phtml';
     }
+    public function showProductForShop($products)
+    {
+        $title = 'Products for Shop';
 
+        require './Templates/header.phtml';
+        require './Templates/shopPage.phtml';
+        require './Templates/footer.phtml';
+    }
     public function showEditPage($shop)
     {
         $title = 'Edit Shop';

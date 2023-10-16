@@ -92,6 +92,9 @@ switch ($params[0]) {
     case 'signout':
         $authController->signOut();
         break;
+    case 'showShop':
+        $shopController->showSpecificShop($params[1]);
+        break;
     case 'deleteShop':
         $shopController->deleteShop($params[1]);
         break;
