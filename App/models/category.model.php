@@ -23,6 +23,14 @@ class CategoryModel extends GenericModel
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function getCategory($id)
+    {
+        $query = $this->db->prepare('SELECT * FROM categories WHERE id = ?');
+        $query->execute([$id]);
+
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
+
     public function updateCategory($value, $id)
     {
         $query = $this->db->prepare('UPDATE categories SET name = ? WHERE id = ?');
@@ -33,6 +41,11 @@ class CategoryModel extends GenericModel
     {
         $query = $this->db->prepare('DELETE FROM categories WHERE id = ?');
         $query->execute([$id]);
+        if ($this->getCategory($id)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public function insertCategory($value)

@@ -67,5 +67,10 @@ class ShopModel extends GenericModel
     {
         $query = $this->db->prepare('DELETE FROM shops WHERE id = ?');
         $query->execute([$id]);
+        if ($this->getDataShop($id)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

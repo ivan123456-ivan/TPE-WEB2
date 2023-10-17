@@ -56,8 +56,7 @@ class CategoryController
     public function deleteCategory($id)
     {
         AuthHelper::verify();
-        if ($id) {
-            $this->model->deleteCategory($id);
+        if ($this->model->deleteCategory($id)) {
             $this->genericView->showSuccess('category deleted successfully');
             header('Refresh: 3; URL=' . BASE_URL . 'adminCategories');
         } else {

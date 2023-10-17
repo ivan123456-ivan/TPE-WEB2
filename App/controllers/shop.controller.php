@@ -47,8 +47,7 @@ class ShopController
     public function deleteShop($id)
     {
         AuthHelper::verify();
-        if ($id) {
-            $this->model->deleteShop($id);
+        if ($this->model->deleteShop($id)) {
             $this->genericView->showSuccess('shop deleted successfully');
             header('Refresh: 3; URL=' . BASE_URL . 'dashboard');
         } else {
