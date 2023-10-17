@@ -52,31 +52,7 @@
       <button type="submit" class="btn btn-primary">Edit Product</button>
     </form>
   </div>
-  <div class="container w-100 row row-cols-3">
-    <?php
-    foreach ($products as $product) :
-    ?>
-        <div class="card col g-4">
-            <img src="<?= $product->product_image ?>" class="card-img-top" alt="<?= $product->product_description ?>">
-            <div class="card-body">
-                <h5 class="card-title"><?= $product->productName ?></h5>
-                <p class="card-text"><?= $product->product_description ?></p>
-                <?php if ($product->stock > 0) : ?>
-                    <p>Stock: <?= $product->stock ?></p>
-                <?php
-                else :
-                ?>
-                    <p class="text-muted">No hay stock</p>
-                <?php
-                endif;
-                ?>
-                <p>$ <?= $product->price ?></p>
-                <span class="badge text-bg-secondary"><?= $product->categoryName ?></span>
-                <a href="showProducts/<?= $product->shopId ?>"><span class="badge text-bg-primary"><?= $product->shopName ?></span></a>
-                <a href="deleteProduct/<?= $product->idProduct?>" class="btn btn-primary">Delete</a>
-            </div>
-        </div>
-    <?php endforeach ?>
-</div>
-
+  <?php
+  require './Templates/product.phtml'
+  ?>
 </div>

@@ -1,13 +1,14 @@
-<div class="container d-flex justify-content-center h-100 w-100 g-2">
+<div class="container d-flex justify-content-center w-100 g-2">
 
     <div class="row">
         <?php
         foreach ($shops as $shop) : ?>
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 mb-4 d-flex flex-column">
                 <a class="card nav-link" href="showShop/<?= $shop->id ?>">
-                    <img src="<?= $shop->shop_image ?>" class="card-img-top h-25" alt="<?= $shop->name ?>" title="<?= $shop->name ?>">
-                    <div class="card-body">
+                    <img src="<?= $shop->shop_image ?>" class="card-img-top" alt="<?= $shop->name ?>" title="<?= $shop->name ?>">
+                    <div class="card-body d-flex flex-column">
                         <h5 class="card-title"><?= $shop->name ?></h5>
+                        <span class="badge text-bg-secondary"><?= $shop->address ?>, B7000 Tandil.</span>
                         <?php if ($showOptions) : ?>
                             <div class="d-flex ">
                                 <a class="btn btn-danger" href="deleteShop/<?= $shop->id ?>">Delete</a>
@@ -16,7 +17,6 @@
                         <?php
                         endif;
                         ?>
-                        <span class="badge text-bg-secondary"><?= $shop->address ?>, B7000 Tandil.</span>
                     </div>
                 </a>
             </div>

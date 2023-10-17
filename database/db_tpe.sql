@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-10-2023 a las 03:06:24
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 17-10-2023 a las 05:07:04
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `categories`
@@ -40,7 +40,8 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 (6, ' Pizza'),
 (5, 'Beverages'),
 (8, 'Empanadas'),
-(7, 'Hamburgers');
+(7, 'Hamburgers'),
+(9, 'Snacks');
 
 -- --------------------------------------------------------
 
@@ -57,7 +58,7 @@ CREATE TABLE `products` (
   `id_shops` int(11) NOT NULL,
   `product_image` varchar(250) NOT NULL,
   `product_description` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `products`
@@ -83,7 +84,10 @@ INSERT INTO `products` (`id`, `name`, `price`, `stock`, `id_categories`, `id_sho
 (41, 'Chicken and Mushroom Empanada', 3, 20, 8, 11, 'https://mediaproxy.salon.com/width/1200/https://media.salon.com/2020/02/empanadas-0205201.jpg', 'Filled with chicken, mushrooms, and onions.'),
 (42, 'Cheese and Spinach Empanada', 3, 20, 8, 11, 'https://ourplantbasedworld.com/wp-content/uploads/2021/03/easy-argentine-spinach-empanadas-recipe-6989.jpg', 'Filled with cheese and fresh spinach.'),
 (43, 'Ham and Cheese Empanada', 3, 22, 8, 11, 'https://assets.bonappetit.com/photos/5d923d42c5d4ea0008b45ea5/1:1/w_1600,c_limit/1019-Ham-Empenadas-2.jpg', 'Filled with ham and melted cheese.'),
-(44, 'Portobello Mushroom Empanada', 3, 18, 8, 11, 'https://ourplantbasedworld.com/wp-content/uploads/2021/03/IMG_2466.jpg', 'Filled with Portobello mushrooms and carameli');
+(44, 'Portobello Mushroom Empanada', 3, 18, 8, 11, 'https://ourplantbasedworld.com/wp-content/uploads/2021/03/IMG_2466.jpg', 'Filled with Portobello mushrooms and carameli'),
+(47, 'Mojito', 2, 100, 5, 12, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXaG3Ja_jWKko21BVCPWxL1bxSC_KPWFtW2A', 'El mojito​ es un cóctel popular originario de'),
+(48, 'Hamburguesa Casera', 3, 100, 7, 12, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-vIlIESFn0xKWxOKlomHNmMqeBh1h7VfT2A', 'Hamburguesa rellena de 3 capas de carne, supe'),
+(49, 'Barra de Cereal', 1, 20, 9, 13, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0eyEEdupQWGuh1OYzJ_UN0XlBwYva3Dz28w', 'Barra nutritiva de cereal.');
 
 -- --------------------------------------------------------
 
@@ -97,7 +101,7 @@ CREATE TABLE `shops` (
   `address` varchar(45) NOT NULL,
   `shop_image` varchar(250) NOT NULL,
   `id_users` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `shops`
@@ -105,7 +109,8 @@ CREATE TABLE `shops` (
 
 INSERT INTO `shops` (`id`, `name`, `address`, `shop_image`, `id_users`) VALUES
 (11, 'Restaurant', 'A random address', 'https://www.spectator.co.uk/wp-content/uploads/2022/07/Tanya-The-Savoy.jpg', 5),
-(12, 'Bar', 'A random address', 'https://cnnespanol.cnn.com/wp-content/uploads/2022/10/221004154233-01-world-best-bars-2022-full-169.jpg?resize=1024,576', 5);
+(12, 'Bar', 'A random address', 'https://cnnespanol.cnn.com/wp-content/uploads/2022/10/221004154233-01-world-best-bars-2022-full-169.jpg?resize=1024,576', 5),
+(13, 'Comedor Universidad', 'Facultad Ciencias Exactas', 'https://www.unicen.edu.ar/sites/default/files/imagenes/actualidad/2009-11/comedor.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -117,7 +122,7 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `user` varchar(45) NOT NULL,
   `password` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `user`
@@ -167,19 +172,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT de la tabla `shops`
 --
 ALTER TABLE `shops`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
