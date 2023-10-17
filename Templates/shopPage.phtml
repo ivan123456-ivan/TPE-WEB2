@@ -1,3 +1,10 @@
 <div class="container">
-    <?php require_once './Templates/product.phtml' ?>
+    <?php if ($products) :
+        require './Templates/product.phtml';
+    else :
+        $msgError = "Could not obtain the products from this shop.";
+        require './Templates/error.phtml';
+    endif;
+    ?>
+
 </div>

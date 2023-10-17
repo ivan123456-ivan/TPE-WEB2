@@ -20,8 +20,9 @@ class ShopController
         $this->view->showShopPage($shops);
     }
 
-    public function showSpecificShop($product){
-        $products = $this->modelProduct->getAllProductsForShop($product);
+    public function showSpecificShop($shop)
+    {
+        $products = $this->modelProduct->getAllProductsForShop($shop);
         $this->view->showProductForShop($products);
     }
 
