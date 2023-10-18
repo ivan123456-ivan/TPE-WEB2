@@ -12,5 +12,18 @@ class GenericModel
             DB_USER,
             DB_PASSWORD
         );
+        $this->_deploy();
+    }
+
+    private function _deploy()
+    {
+        $query = $this->db->query('SHOW TABLES');
+        $tables = $query->fetchAll();
+        if (count($tables) > 0) {
+            $sql = <<<END
+            
+            END;
+            $this->db->query($sql);
+        }
     }
 }
