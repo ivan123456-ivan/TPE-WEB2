@@ -1,5 +1,6 @@
 <div class="container">
     <?php if ($products) :
+        $showOption = false;
         require './Templates/product.phtml';
     else :
         $msgError = "Could not obtain the products from this shop.";
